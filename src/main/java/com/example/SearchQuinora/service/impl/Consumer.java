@@ -42,7 +42,9 @@ public class Consumer {
         userSearch.setEducation(user.getEducation());
         userSearch.setEmployment(user.getEmployment());
         userSearch.setProfileCredential(user.getProfileCredential());
+        //userSearch.setUserId(user.getUserId());
         userSearch.setUsername(user.getUsername());
+        userSearch.setCategory(user.getCategory());
         //user.setUserId(user1.getUserId());
         searchService.saveDetailsUser(userSearch);
     }

@@ -37,6 +37,8 @@ public class UserDetailsFromUser {
     //@OneToMany(cascade = CascadeType.ALL)
     private List<Employment> employment;
 
+    private String[] category;
+
     @Override
     public String toString() {
         return "UserDetailsFromUser{" +

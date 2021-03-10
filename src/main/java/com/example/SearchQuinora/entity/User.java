@@ -2,8 +2,10 @@ package com.example.SearchQuinora.entity;
 
 
 import lombok.Data;
+import org.apache.kafka.common.protocol.types.Field;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -15,7 +17,7 @@ import java.util.List;
 @Data
 @Entity(name = "usersearch")
 @Document(indexName = "usertest11")
-public class User {
+public class User extends BaseEntity{
 
     @Id
     @org.springframework.data.annotation.Id
@@ -41,4 +43,8 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Employment> employment;
+
+    @Type(type = "string-array")
+    @Column(columnDefinition = "text[]")
+    private String category[];
 }

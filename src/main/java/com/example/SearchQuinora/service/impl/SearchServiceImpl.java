@@ -55,8 +55,8 @@ public class SearchServiceImpl implements SearchService {
     {
         text = text.replace(" ","+");
         QueryBuilder queryBuilder = QueryBuilders.boolQuery().should(QueryBuilders.queryStringQuery(text)
-        .lenient(true).field("username").field("firstName").field("lastName")).should(QueryBuilders.queryStringQuery("*" + text + "*")
-        .lenient(true).field("username").field("firstName").field("lastName"));
+        .lenient(true).field("username").field("firstName").field("lastName").field("category")).should(QueryBuilders.queryStringQuery("*" + text + "*")
+        .lenient(true).field("username").field("firstName").field("lastName").field("category"));
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
         List<User> users = elasticsearchRestTemplate.queryForList(nativeSearchQuery, User.class, IndexCoordinates.of("usertest11"));
         return users;
