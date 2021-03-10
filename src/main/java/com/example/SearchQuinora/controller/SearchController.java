@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/search")
+@CrossOrigin("*")
 public class SearchController {
 
     @Autowired

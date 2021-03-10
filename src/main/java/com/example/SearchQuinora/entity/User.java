@@ -14,7 +14,7 @@ import java.util.List;
 
 @Data
 @Entity(name = "usersearch")
-@Document(indexName = "usertest9")
+@Document(indexName = "usertest11")
 public class User {
 
     @Id

@@ -45,7 +45,7 @@ public class SearchServiceImpl implements SearchService {
         .lenient(true).field("username").field("firstName").field("lastName")).should(QueryBuilders.queryStringQuery("*" + text + "*")
         .lenient(true).field("username").field("firstName").field("lastName"));
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
-        List<User> users = elasticsearchRestTemplate.queryForList(nativeSearchQuery, User.class, IndexCoordinates.of("usertest9"));
+        List<User> users = elasticsearchRestTemplate.queryForList(nativeSearchQuery, User.class, IndexCoordinates.of("usertest11"));
         return users;
     }
 }
