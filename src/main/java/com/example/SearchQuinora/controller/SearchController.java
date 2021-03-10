@@ -1,8 +1,10 @@
 package com.example.SearchQuinora.controller;
 
+import com.example.SearchQuinora.entity.Answer;
 import com.example.SearchQuinora.entity.Question;
 import com.example.SearchQuinora.entity.User;
 import com.example.SearchQuinora.service.SearchService;
+import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,4 +41,18 @@ public class SearchController {
     {
         return searchService.findQuestion(text);
     }
+
+    @PostMapping(value = "/saveAnswer")
+    public Answer saveDetails(@RequestBody Answer answer)
+    {
+        return searchService.saveDetailsAnswer(answer);
+    }
+
+    @GetMapping(value = "/answer/{text}")
+    public List<Answer> findAnswer(@PathVariable("text") String text)
+    {
+        return searchService.findAnswer(text);
+    }
+
+
 }
