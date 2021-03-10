@@ -30,9 +30,9 @@ public class User {
     private String username;
     private String profileCredential;
     private String address;
-    //@CreationTimestamp
-    //@Column(updatable = false)
-    //private LocalDateTime joiningDate;
+//    @CreationTimestamp
+//    @Column(updatable = false)
+//    private LocalDateTime joiningDate;
     private String bio;
     //private String profileImage;
 
