@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -28,8 +29,10 @@ public class UserDetailsFromUser {
     private String lastName;
     //@Column(unique = true)
     private String username;
-    private String profileCredential;
-    private String address;
+    private String profession;
+    private String city;
+    private String country;
+    private String state;
 //    @CreationTimestamp
 //    @Column
     private LocalDateTime joiningDate;
@@ -52,11 +55,17 @@ public class UserDetailsFromUser {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
-                ", profileCredential='" + profileCredential + '\'' +
-                ", address='" + address + '\'' +
+                ", profession='" + profession + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", state='" + state + '\'' +
+                ", joiningDate=" + joiningDate +
                 ", bio='" + bio + '\'' +
+                ", profileImage='" + profileImage + '\'' +
+                ", email='" + email + '\'' +
                 ", education=" + education +
                 ", employment=" + employment +
+                ", category=" + Arrays.toString(category) +
                 '}';
     }
 }

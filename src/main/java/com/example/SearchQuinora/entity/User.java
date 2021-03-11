@@ -34,8 +34,10 @@ public class User extends BaseEntity{
     private String lastName;
     @Column(unique = true)
     private String username;
-    private String profileCredential;
-    private String address;
+    private String profession;
+    private String city;
+    private String country;
+    private String state;
     @Column(unique = true)
     private String email;
 //    @CreationTimestamp

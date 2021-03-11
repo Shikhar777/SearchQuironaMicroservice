@@ -114,11 +114,13 @@ public class Consumer {
         User userSearch = userRepository.findByUsername(userUpdateDetails1.getUsername());
         userSearch.setFirstName(userUpdateDetails1.getFirstName());
         userSearch.setLastName(userUpdateDetails1.getLastName());
-        userSearch.setAddress(userUpdateDetails1.getAddress());
+        userSearch.setCountry(userUpdateDetails1.getCountry());
+        userSearch.setCity(userUpdateDetails1.getCity());
+        userSearch.setState(userUpdateDetails1.getState());
         userSearch.setBio(userUpdateDetails1.getBio());
         userSearch.setEducation(userUpdateDetails1.getEducation());
         userSearch.setEmployment(userUpdateDetails1.getEmployment());
-        userSearch.setProfileCredential(userUpdateDetails1.getProfileCredential());
+        userSearch.setProfession(userUpdateDetails1.getProfession());
         //userSearch.setUserId(user.getUserId());
         //userSearch.setUsername(userUpdateDetails1.getUsername());
         //user.setUserId(user1.getUserId());
