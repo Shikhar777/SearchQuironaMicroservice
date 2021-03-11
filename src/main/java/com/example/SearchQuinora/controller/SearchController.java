@@ -54,5 +54,4 @@ public class SearchController {
         return searchService.findAnswer(text);
     }
 
-
 }
