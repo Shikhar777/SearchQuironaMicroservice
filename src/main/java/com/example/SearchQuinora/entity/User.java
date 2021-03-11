@@ -36,6 +36,8 @@ public class User extends BaseEntity{
     private String username;
     private String profileCredential;
     private String address;
+    @Column(unique = true)
+    private String email;
 //    @CreationTimestamp
 //    @Column(updatable = false)
 //    private LocalDateTime joiningDate;

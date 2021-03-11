@@ -35,6 +35,7 @@ public class UserDetailsFromUser {
     private LocalDateTime joiningDate;
     private String bio;
     private String profileImage;
+    private String email;
 
     //@OneToMany(cascade = CascadeType.ALL)
     private List<Education> education;

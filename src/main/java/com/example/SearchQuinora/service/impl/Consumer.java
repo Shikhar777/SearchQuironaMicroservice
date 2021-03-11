@@ -45,14 +45,7 @@ public class Consumer {
         }
         System.out.println("User: "+user);
         User userSearch = new User();
-//        userSearch.setFirstName(user.getFirstName());
-//        userSearch.setLastName(user.getLastName());
-//        userSearch.setAddress(user.getAddress());
-//        userSearch.setBio(user.getBio());
-//        userSearch.setEducation(user.getEducation());
-//        userSearch.setEmployment(user.getEmployment());
-//        userSearch.setProfileCredential(user.getProfileCredential());
-        //userSearch.setUserId(user.getUserId());
+        userSearch.setEmail(user.getEmail());
         userSearch.setUsername(user.getUsername());
         userSearch.setCategory(user.getCategory());
         //user.setUserId(user1.getUserId());
