@@ -24,8 +24,8 @@ public class User extends BaseEntity{
     @GenericGenerator(name = "user_id_seq", strategy = "increment")
     @GeneratedValue(generator = "user_id_seq", strategy = GenerationType.AUTO)
     private int userId;
-    @NotBlank
-    @Size(min = 1, max = 100)
+    //@NotBlank
+    //@Size(min = 1, max = 100)
     private String firstName;
     private String lastName;
     @Column(unique = true)

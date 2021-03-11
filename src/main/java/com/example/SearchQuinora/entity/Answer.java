@@ -19,8 +19,8 @@ public class Answer {
     @org.springframework.data.annotation.Id
     @GenericGenerator(name = "answer_id_seq", strategy = "increment")
     @GeneratedValue(generator = "answer_id_seq", strategy = GenerationType.AUTO)
-    private int answerId;
-    private Long questionId;
+    private int Id;
+    private Long questionID;
     private String userName;
     private Boolean status;
     private Date timeStamp;

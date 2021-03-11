@@ -1,10 +1,15 @@
 package com.example.SearchQuinora.service.impl;
 
+import com.example.SearchQuinora.entity.Answer;
+import com.example.SearchQuinora.entity.Question;
 import com.example.SearchQuinora.entity.User;
+import com.example.SearchQuinora.entity.newentity.AnswerDetails;
+import com.example.SearchQuinora.entity.newentity.QuestionDetails;
 import com.example.SearchQuinora.entity.newentity.UserDetailsFromUser;
 
 import com.example.SearchQuinora.service.SearchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.kafka.common.protocol.types.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +27,7 @@ public class Consumer {
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
 
     @KafkaListener(topics="updateByUserToSearchAfterUpdate", groupId = "group_id")
-    public void listener(String userDetailsFromUser)
+    public void listener1(String userDetailsFromUser)
     {
         ObjectMapper objectMapper = new ObjectMapper();
         UserDetailsFromUser user = null;
@@ -47,6 +52,52 @@ public class Consumer {
         userSearch.setCategory(user.getCategory());
         //user.setUserId(user1.getUserId());
         searchService.saveDetailsUser(userSearch);
+    }
+
+    @KafkaListener(topics = "updateSearchQA", groupId = "group_id")
+    public void listener2(String questionDetails)
+    {
+        ObjectMapper objectMapper = new ObjectMapper();
+        QuestionDetails questionDetails1 = null;
+        try{
+            questionDetails1 = objectMapper.readValue(questionDetails, QuestionDetails.class);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println("Question: "+questionDetails1);
+        Question question = new Question();
+        question.setCategory(questionDetails1.getCategory());
+        question.setQuestionText(questionDetails1.getQuestionText());
+        question.setQuestionTitle(questionDetails1.getQuestionTitle());
+        question.setQuestionId(questionDetails1.getQuestionId());
+        question.setUsername(questionDetails1.getUsername());
+        searchService.saveDetailsQuestion(question);
+    }
+
+    @KafkaListener(topics = "updateSearchAnswer", groupId = "group_id")
+    public void listener3(String answerDetails)
+    {
+        ObjectMapper objectMapper = new ObjectMapper();
+        AnswerDetails answerDetails1 = null;
+        try{
+            answerDetails1 = objectMapper.readValue(answerDetails, AnswerDetails.class);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println("Answer: "+answerDetails1);
+        Answer answer = new Answer();
+        answer.setId(answerDetails1.getId());
+        answer.setAnswerText(answerDetails1.getAnswerText());
+        answer.setImgsrc(answerDetails1.getImgsrc());
+        answer.setQuestionID(answerDetails1.getQuestionID());
+        answer.setTimeStamp(answerDetails1.getTimeStamp());
+        answer.setStatus(answerDetails1.getStatus());
+        answer.setUserName(answerDetails1.getUserName());
+        searchService.saveDetailsAnswer(answer);
     }
 
 }

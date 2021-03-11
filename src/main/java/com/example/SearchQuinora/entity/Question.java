@@ -28,4 +28,5 @@ public class Question {
     @Size(min = 30, max = 400)
     private String questionText;
     private String category;
+    private String username;
 }
