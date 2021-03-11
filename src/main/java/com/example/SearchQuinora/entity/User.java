@@ -1,6 +1,10 @@
 package com.example.SearchQuinora.entity;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Data;
 import org.apache.kafka.common.protocol.types.Field;
 import org.hibernate.annotations.CreationTimestamp;

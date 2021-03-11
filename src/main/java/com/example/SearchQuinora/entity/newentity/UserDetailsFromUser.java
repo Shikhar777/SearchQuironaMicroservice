@@ -2,11 +2,16 @@ package com.example.SearchQuinora.entity.newentity;
 
 import com.example.SearchQuinora.entity.Education;
 import com.example.SearchQuinora.entity.Employment;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -25,8 +30,8 @@ public class UserDetailsFromUser {
     private String username;
     private String profileCredential;
     private String address;
-    @CreationTimestamp
-    @Column(updatable = false)
+//    @CreationTimestamp
+//    @Column
     private LocalDateTime joiningDate;
     private String bio;
     private String profileImage;

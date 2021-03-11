@@ -7,6 +7,8 @@ import com.example.SearchQuinora.entity.newentity.AnswerDetails;
 import com.example.SearchQuinora.entity.newentity.QuestionDetails;
 import com.example.SearchQuinora.entity.newentity.UserDetailsFromUser;
 
+import com.example.SearchQuinora.entity.newentity.UserUpdateDetails;
+import com.example.SearchQuinora.repository.UserRepository;
 import com.example.SearchQuinora.service.SearchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.protocol.types.Field;
@@ -22,6 +24,9 @@ public class Consumer {
 
     @Autowired
     private SearchService searchService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     //com.example.SearchQuinora.update
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
@@ -40,13 +45,13 @@ public class Consumer {
         }
         System.out.println("User: "+user);
         User userSearch = new User();
-        userSearch.setFirstName(user.getFirstName());
-        userSearch.setLastName(user.getLastName());
-        userSearch.setAddress(user.getAddress());
-        userSearch.setBio(user.getBio());
-        userSearch.setEducation(user.getEducation());
-        userSearch.setEmployment(user.getEmployment());
-        userSearch.setProfileCredential(user.getProfileCredential());
+//        userSearch.setFirstName(user.getFirstName());
+//        userSearch.setLastName(user.getLastName());
+//        userSearch.setAddress(user.getAddress());
+//        userSearch.setBio(user.getBio());
+//        userSearch.setEducation(user.getEducation());
+//        userSearch.setEmployment(user.getEmployment());
+//        userSearch.setProfileCredential(user.getProfileCredential());
         //userSearch.setUserId(user.getUserId());
         userSearch.setUsername(user.getUsername());
         userSearch.setCategory(user.getCategory());
@@ -98,6 +103,33 @@ public class Consumer {
         answer.setStatus(answerDetails1.getStatus());
         answer.setUserName(answerDetails1.getUserName());
         searchService.saveDetailsAnswer(answer);
+    }
+
+    @KafkaListener(topics="afterUpdate", groupId = "group_id")
+    public void listener4(String userUpdateDetails)
+    {
+        ObjectMapper objectMapper = new ObjectMapper();
+        UserUpdateDetails userUpdateDetails1 = null;
+        try{
+            userUpdateDetails1 = objectMapper.readValue(userUpdateDetails, UserUpdateDetails.class);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println("User: "+userUpdateDetails1);
+        User userSearch = userRepository.findByUsername(userUpdateDetails1.getUsername());
+        userSearch.setFirstName(userUpdateDetails1.getFirstName());
+        userSearch.setLastName(userUpdateDetails1.getLastName());
+        userSearch.setAddress(userUpdateDetails1.getAddress());
+        userSearch.setBio(userUpdateDetails1.getBio());
+        userSearch.setEducation(userUpdateDetails1.getEducation());
+        userSearch.setEmployment(userUpdateDetails1.getEmployment());
+        userSearch.setProfileCredential(userUpdateDetails1.getProfileCredential());
+        //userSearch.setUserId(user.getUserId());
+        //userSearch.setUsername(userUpdateDetails1.getUsername());
+        //user.setUserId(user1.getUserId());
+        searchService.saveDetailsUser(userSearch);
     }
 
 }
