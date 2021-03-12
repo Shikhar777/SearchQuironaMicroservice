@@ -29,7 +29,7 @@ public class QuestionDetails {
     @CreatedDate
     private Date createdAt;
     private String username;
-    private boolean status;
+    private Boolean status;
 
     @Override
     public String toString() {

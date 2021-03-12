@@ -4,16 +4,14 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
 @Entity(name = "questionsearch")
-@Document(indexName = "questiontest1")
+@Document(indexName = "questiontest5")
 public class Question {
 
     @Id
@@ -29,4 +27,7 @@ public class Question {
     private String questionText;
     private String category;
     private String username;
+    @Column(columnDefinition = "boolean default true")
+    @NotNull
+    private Boolean status;
 }

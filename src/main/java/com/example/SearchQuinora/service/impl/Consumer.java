@@ -3,11 +3,10 @@ package com.example.SearchQuinora.service.impl;
 import com.example.SearchQuinora.entity.Answer;
 import com.example.SearchQuinora.entity.Question;
 import com.example.SearchQuinora.entity.User;
-import com.example.SearchQuinora.entity.newentity.AnswerDetails;
-import com.example.SearchQuinora.entity.newentity.QuestionDetails;
-import com.example.SearchQuinora.entity.newentity.UserDetailsFromUser;
+import com.example.SearchQuinora.entity.newentity.*;
 
-import com.example.SearchQuinora.entity.newentity.UserUpdateDetails;
+import com.example.SearchQuinora.repository.AnswerRepository;
+import com.example.SearchQuinora.repository.QuestionRepository;
 import com.example.SearchQuinora.repository.UserRepository;
 import com.example.SearchQuinora.service.SearchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +26,12 @@ public class Consumer {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private QuestionRepository questionRepository;
+
+    @Autowired
+    private AnswerRepository answerRepository;
 
     //com.example.SearchQuinora.update
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
@@ -71,6 +76,7 @@ public class Consumer {
         question.setQuestionTitle(questionDetails1.getQuestionTitle());
         question.setQuestionId(questionDetails1.getQuestionId());
         question.setUsername(questionDetails1.getUsername());
+        question.setStatus(questionDetails1.getStatus());
         searchService.saveDetailsQuestion(question);
     }
 
@@ -125,6 +131,42 @@ public class Consumer {
         //userSearch.setUsername(userUpdateDetails1.getUsername());
         //user.setUserId(user1.getUserId());
         searchService.saveDetailsUser(userSearch);
+    }
+
+    @KafkaListener(topics="disableQuestion", groupId = "group_id")
+    public void listener5(String questionStatus)
+    {
+        ObjectMapper objectMapper = new ObjectMapper();
+        QuestionStatus questionStatus1 = null;
+        try{
+            questionStatus1 = objectMapper.readValue(questionStatus, QuestionStatus.class);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println("Update: "+questionStatus1);
+        Question question = questionRepository.findByQuestionId(questionStatus1.getQuestionId());
+        question.setStatus(questionStatus1.getStatus());
+        searchService.saveDetailsQuestion(question);
+    }
+
+    @KafkaListener(topics="disableAnswer", groupId = "group_id")
+    public void listener6(String answerStatus)
+    {
+        ObjectMapper objectMapper = new ObjectMapper();
+        AnswerStatus answerStatus1 = null;
+        try{
+            answerStatus1 = objectMapper.readValue(answerStatus, AnswerStatus.class);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println("Update: "+answerStatus1);
+        Answer answer = answerRepository.findByAnswerId(answerStatus1.getId(), answerStatus1.getQuestionID());
+        answer.setStatus(answerStatus1.getStatus());
+        searchService.saveDetailsAnswer(answer);
     }
 
 }
