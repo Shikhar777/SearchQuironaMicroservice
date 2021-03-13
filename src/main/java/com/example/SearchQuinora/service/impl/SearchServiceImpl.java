@@ -77,7 +77,7 @@ public class SearchServiceImpl implements SearchService {
         .lenient(true).field("username").field("firstName").field("lastName").field("category").field("country").field("city")
                 .field("state"));
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
-        List<User> users = elasticsearchRestTemplate.queryForList(nativeSearchQuery, User.class, IndexCoordinates.of("usertest14"));
+        List<User> users = elasticsearchRestTemplate.queryForList(nativeSearchQuery, User.class, IndexCoordinates.of("usertest17"));
         return users;
     }
 
@@ -90,7 +90,7 @@ public class SearchServiceImpl implements SearchService {
                 .should(QueryBuilders.queryStringQuery("*" + text + "*").lenient(true).field("questionTitle")
                 .field("questionText").field("category"));
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
-        List<Question> questions = elasticsearchRestTemplate.queryForList(nativeSearchQuery, Question.class, IndexCoordinates.of("questiontest7"));
+        List<Question> questions = elasticsearchRestTemplate.queryForList(nativeSearchQuery, Question.class, IndexCoordinates.of("questiontest10"));
         return questions;
     }
 
@@ -102,7 +102,7 @@ public class SearchServiceImpl implements SearchService {
         .lenient(true).field("answerText")).should(QueryBuilders.queryStringQuery("*" + text + "*").lenient(true)
         .field("answerText"));
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
-        List<Answer> answers = elasticsearchRestTemplate.queryForList(nativeSearchQuery, Answer.class, IndexCoordinates.of("answertest4"));
+        List<Answer> answers = elasticsearchRestTemplate.queryForList(nativeSearchQuery, Answer.class, IndexCoordinates.of("answertest7"));
         return answers;
     }
 
