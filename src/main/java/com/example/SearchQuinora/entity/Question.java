@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity(name = "questionsearch")
-@Document(indexName = "questiontest5")
+@Document(indexName = "questiontest7")
 public class Question {
 
     @Id
@@ -30,4 +30,6 @@ public class Question {
     @Column(columnDefinition = "boolean default true")
     @NotNull
     private Boolean status;
+    @Column(columnDefinition = "TEXT")
+    private String questionImage;
 }

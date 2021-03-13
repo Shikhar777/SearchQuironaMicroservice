@@ -13,14 +13,11 @@ import org.hibernate.annotations.Type;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity(name = "usersearch")
-@Document(indexName = "usertest12")
+@Document(indexName = "usertest14")
 public class User extends BaseEntity{
 
     @Id
@@ -43,8 +40,10 @@ public class User extends BaseEntity{
 //    @CreationTimestamp
 //    @Column(updatable = false)
 //    private LocalDateTime joiningDate;
+    @Column(columnDefinition = "TEXT")
     private String bio;
-    //private String profileImage;
+    @Column(columnDefinition = "TEXT")
+    private String profileImage;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Education> education;

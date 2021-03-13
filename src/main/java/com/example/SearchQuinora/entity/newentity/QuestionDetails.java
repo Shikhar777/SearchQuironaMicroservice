@@ -30,6 +30,7 @@ public class QuestionDetails {
     private Date createdAt;
     private String username;
     private Boolean status;
+    private String questionImage;
 
     @Override
     public String toString() {

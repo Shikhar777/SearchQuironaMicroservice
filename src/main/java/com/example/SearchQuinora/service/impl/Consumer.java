@@ -36,7 +36,7 @@ public class Consumer {
     //com.example.SearchQuinora.update
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
 
-    @KafkaListener(topics="updateByUserToSearchAfterUpdate", groupId = "group_id")
+    @KafkaListener(topics="updateByUserToSearchAfterUpdate", groupId = "group_quora")
     public void listener1(String userDetailsFromUser)
     {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -57,7 +57,7 @@ public class Consumer {
         searchService.saveDetailsUser(userSearch);
     }
 
-    @KafkaListener(topics = "updateSearchQA", groupId = "group_id")
+    @KafkaListener(topics = "updateSearchQA", groupId = "group_quora")
     public void listener2(String questionDetails)
     {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -77,10 +77,11 @@ public class Consumer {
         question.setQuestionId(questionDetails1.getQuestionId());
         question.setUsername(questionDetails1.getUsername());
         question.setStatus(questionDetails1.getStatus());
+        question.setQuestionImage(questionDetails1.getQuestionImage());
         searchService.saveDetailsQuestion(question);
     }
 
-    @KafkaListener(topics = "updateSearchAnswer", groupId = "group_id")
+    @KafkaListener(topics = "updateSearchAnswer", groupId = "group_quora")
     public void listener3(String answerDetails)
     {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -96,15 +97,15 @@ public class Consumer {
         Answer answer = new Answer();
         answer.setId(answerDetails1.getId());
         answer.setAnswerText(answerDetails1.getAnswerText());
-        answer.setImgsrc(answerDetails1.getImgsrc());
         answer.setQuestionID(answerDetails1.getQuestionID());
         answer.setTimeStamp(answerDetails1.getTimeStamp());
+        answer.setImgsrc(answerDetails1.getImgsrc());
         answer.setStatus(answerDetails1.getStatus());
         answer.setUserName(answerDetails1.getUserName());
         searchService.saveDetailsAnswer(answer);
     }
 
-    @KafkaListener(topics="afterUpdate", groupId = "group_id")
+    @KafkaListener(topics="afterUpdate", groupId = "group_quora")
     public void listener4(String userUpdateDetails)
     {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -127,13 +128,11 @@ public class Consumer {
         userSearch.setEducation(userUpdateDetails1.getEducation());
         userSearch.setEmployment(userUpdateDetails1.getEmployment());
         userSearch.setProfession(userUpdateDetails1.getProfession());
-        //userSearch.setUserId(user.getUserId());
-        //userSearch.setUsername(userUpdateDetails1.getUsername());
-        //user.setUserId(user1.getUserId());
+        userSearch.setProfileImage(userUpdateDetails1.getProfileImage());
         searchService.saveDetailsUser(userSearch);
     }
 
-    @KafkaListener(topics="disableQuestion", groupId = "group_id")
+    @KafkaListener(topics="disableQuestion", groupId = "group_quora")
     public void listener5(String questionStatus)
     {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -151,7 +150,7 @@ public class Consumer {
         searchService.saveDetailsQuestion(question);
     }
 
-    @KafkaListener(topics="disableAnswer", groupId = "group_id")
+    @KafkaListener(topics="disableAnswer", groupId = "group_quora")
     public void listener6(String answerStatus)
     {
         ObjectMapper objectMapper = new ObjectMapper();
