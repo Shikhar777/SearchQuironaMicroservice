@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Entity(name = "answersearch")
-@Document(indexName = "answertest7")
+@Document(indexName = "answertest9")
 public class Answer {
 
     @Id
