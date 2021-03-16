@@ -1,6 +1,7 @@
 package com.example.SearchQuinora.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -11,7 +12,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity(name = "questionsearch")
-@Document(indexName = "questiontest12")
+@Document(indexName = "questiontest100")
 public class Question {
 
     @Id
@@ -20,12 +21,13 @@ public class Question {
     @GeneratedValue(generator = "question_id_seq", strategy = GenerationType.AUTO)
     private int questionId;
     @NotBlank
-    @Size(min=10, max = 150)
+    @Column(columnDefinition = "TEXT")
     private String questionTitle;
     @NotBlank
-    @Size(min = 30, max = 400)
+    @Column(columnDefinition = "TEXT")
     private String questionText;
     private String category;
+    @NotNull
     private String username;
     @Column(columnDefinition = "boolean default true")
     @NotNull

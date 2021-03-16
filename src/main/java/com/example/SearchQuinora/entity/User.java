@@ -13,11 +13,12 @@ import org.hibernate.annotations.Type;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
 @Entity(name = "usersearch")
-@Document(indexName = "usertest19")
+@Document(indexName = "usertest100")
 public class User extends BaseEntity{
 
     @Id
@@ -30,6 +31,7 @@ public class User extends BaseEntity{
     private String firstName;
     private String lastName;
     @Column(unique = true)
+    @NotNull
     private String username;
     private String profession;
     private String city;

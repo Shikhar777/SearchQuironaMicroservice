@@ -5,11 +5,12 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
 @Entity(name = "answersearch")
-@Document(indexName = "answertest9")
+@Document(indexName = "answertest100")
 public class Answer {
 
     @Id
@@ -18,6 +19,7 @@ public class Answer {
     @GeneratedValue(generator = "answer_id_seq", strategy = GenerationType.AUTO)
     private int Id;
     private Long questionID;
+    @NotNull
     private String userName;
     private Boolean status;
     private Date timeStamp;
