@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity(name = "questionsearch")
-@Document(indexName = "questiontest101")
+@Document(indexName = "questiontest102")
 public class Question {
 
     @Id

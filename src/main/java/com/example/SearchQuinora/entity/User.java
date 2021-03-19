@@ -18,7 +18,7 @@ import java.util.List;
 
 @Data
 @Entity(name = "usersearch")
-@Document(indexName = "usertest101")
+@Document(indexName = "usertest102")
 public class User extends BaseEntity{
 
     @Id
